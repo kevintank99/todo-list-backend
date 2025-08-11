@@ -2,6 +2,7 @@ import express from "express";
 import config from "./config";
 import { initializeDatabase } from "./db";
 import routes from "./routes";
+import { scheduleTodoCron } from "./jobs/todoCron";  // import your cron scheduler
 
 
 
@@ -18,6 +19,10 @@ app.use(`/${config.VERSION}/api`, routes);
 const startServer = async () => {
   try {
     await initializeDatabase();
+
+    // Start the cron job here, after DB is ready
+    scheduleTodoCron();
+
     app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
     });

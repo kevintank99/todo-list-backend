@@ -17,6 +17,7 @@ const TodoSchema = new Schema<TodoDocument>({
     },
    },
   completed: { type: Boolean, default: false },
+  updatedByCron: { type: Boolean, default: false },
   user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 },
   {

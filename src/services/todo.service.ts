@@ -62,9 +62,21 @@ const updateTodoById = async (
   return updatedTodo;
 };
 
+const markExpiredTodosAsCompleted = async (): Promise<number> => {
+  const now = new Date();
+
+  const result = await Todo.updateMany(
+    { dueDate: { $lt: now }, completed: false },
+    { $set: { completed: true, updatedByCron: true } }
+  );
+
+  return result.modifiedCount; 
+};
+
 export const todoServices = {
   createTodo,
   getTodosByUser,
 	deleteTodoById,
-	updateTodoById
+	updateTodoById,
+	markExpiredTodosAsCompleted
 };

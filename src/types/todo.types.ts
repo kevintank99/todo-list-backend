@@ -5,6 +5,7 @@ export interface ITodo {
   description?: string;
   dueDate: Date;
   completed: boolean;
+  updatedByCron?: boolean
   user: Types.ObjectId | string;
 }
 
@@ -19,4 +20,5 @@ export interface UpdateTodoInput {
   description?: string;
   dueDate?: Date;
   completed?: boolean;
+  updatedByCron?: boolean
 }
